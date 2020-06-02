@@ -7,5 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:D:\natali\my.db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="my [2]" uuid="2b3b966e-816f-4aa8-bcd3-56aa5e7f54e6">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\raket\PycharmProjects\natali\my.db</jdbc-url>
+    </data-source>
   </component>
 </project>
