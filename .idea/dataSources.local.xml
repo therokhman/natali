@@ -6,12 +6,16 @@
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
-      <auth-provider>no-auth</auth-provider>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema" qname="main" />
+          <node kind="schema" negative="1" />
         </introspection-scope>
       </schema-mapping>
+    </data-source>
+    <data-source name="my [2]" uuid="2b3b966e-816f-4aa8-bcd3-56aa5e7f54e6">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
+      <auth-provider>no-auth</auth-provider>
+      <schema-mapping />
     </data-source>
   </component>
 </project>
