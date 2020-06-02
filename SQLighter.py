@@ -7,16 +7,6 @@ class DB:
         self.cursor = self.connection.cursor()
         self.connection.commit()
 
-    def afk(self, table_name, properties, primary):
-        query = 'CREATE TABLE IF NOT EXISTS ' + table_name + ' ('
-        for key in properties:
-            query += key + ' ' + properties[key]
-            if primary == key:
-                query += ' PRIMARY KEY'
-            query += ','
-        query += ')'
-        print(query)
-
     def add_user(self, email, name, surname, age, phone, user_type='client'):
         self.cursor.execute("INSERT INTO user (user_type, email, name, surname, age, phone) VALUES ("
                             + str(user_type) + ", "
@@ -73,21 +63,36 @@ class DB:
     def edit_event(self, event_id, user_id, master_id, time):
         self.cursor.execute("UPDATE event SET "
                             + "master_id = " + str(master_id) + ", "
+                            + "user_id = " + str(user_id) + ", "
                             + "time = " + str(time)
                             + "WHERE id = " + str(event_id))
         self.connection.commit()
 
-    def get_user(self, _id):
-        self.cursor.execute("SELECT * FROM user WHERE id = " + str(_id))
+    def get_users(self):
+        self.cursor.execute("SELECT * FROM user")
         return self.cursor.fetchall()
 
-    def get_master(self, _id):
-        self.cursor.execute("SELECT * FROM master WHERE id = " +str(_id))
+    def get_masters(self):
+        self.cursor.execute("SELECT * FROM master")
         return self.cursor.fetchall()
+
+    def get_events(self):
+        self.cursor.execute("SELECT * FROM event")
+        return self.cursor.fetchall()
+
+    def get_user(self, _id):
+        self.cursor.execute("SELECT * FROM user WHERE id = " + str(_id))
+        return self.cursor.fetchall()[0]
+
+    def get_master(self, _id):
+        self.cursor.execute("SELECT * FROM master WHERE id = " + str(_id))
+        master = self.cursor.fetchall()[0]
+        user = self.get_user(master[0])
+        return tuple([master[1], master[2], master[3]]) + user
 
     def get_event(self, _id):
         self.cursor.execute("SELECT * FROM event WHERE id = " + str(_id))
-        return self.cursor.fetchall()
+        return self.cursor.fetchall()[0]
 
     def del_user(self, _id):
         self.cursor.execute("DELETE FROM user WHERE id = " + str(_id))
